@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explora tu identidad de género · Test de autoconocimiento</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f5;
+  --card: #ffffff;
+  --pk: #c97fa8;
+  --bl: #6b9cc4;
+  --tl: #6dbfa0;
+  --am: #c9a06b;
+  --lv: #9b7bc4;
+  --tx1: #28223a;
+  --tx2: #6b637a;
+  --tx3: #a49ab5;
+  --bd: rgba(170,160,195,0.22);
+  --bdh: rgba(170,160,195,0.45);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--tx1); min-height: 100vh; line-height: 1.65; }
+
+.stripe { height: 5px; background: linear-gradient(90deg,#F5A9B8 0%,#ffe8f0 20%,#ffffff 35%,#c8eeff 50%,#5BCEFA 65%,#c8eeff 80%,#ffffff 90%,#F5A9B8 100%); }
+
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp .4s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+.wc { max-width: 660px; margin: 0 auto; padding: 52px 24px 80px; text-align: center; }
+.wc-orb { width: 88px; height: 88px; border-radius: 50%; background: conic-gradient(#F5A9B8 0%,#d4a0c8 25%,#7b9ec4 50%,#5BCEFA 70%,#8ec4a2 85%,#F5A9B8 100%); display: inline-flex; align-items: center; justify-content: center; font-size: 38px; margin-bottom: 28px; }
+.wc h1 { font-family: 'Lora', serif; font-size: clamp(27px,5vw,40px); font-weight: 600; line-height: 1.2; margin-bottom: 8px; }
+.wc-tagline { font-family: 'Lora', serif; font-style: italic; font-size: 16px; color: var(--pk); margin-bottom: 28px; }
+.wc-desc { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 22px 26px; font-size: 15px; color: var(--tx2); line-height: 1.82; margin-bottom: 18px; text-align: left; }
+.wc-desc p { margin-bottom: 10px; } .wc-desc p:last-child { margin-bottom: 0; }
+.wc-notice { background: linear-gradient(135deg,#fef2f7,#f0f5ff); border: 1px solid rgba(201,127,168,.28); border-radius: 12px; padding: 15px 20px; font-size: 13.5px; color: var(--tx2); margin-bottom: 30px; text-align: left; line-height: 1.72; }
+.wc-notice strong { color: var(--pk); }
+.chips { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 9px; margin-bottom: 36px; text-align: left; }
+.chip { background: var(--card); border: 1px solid var(--bd); border-radius: 10px; padding: 11px 14px; font-size: 12.5px; color: var(--tx2); }
+.chip em { display: block; font-size: 19px; font-style: normal; margin-bottom: 4px; }
+.chip strong { display: block; font-size: 13px; color: var(--tx1); font-weight: 500; margin-bottom: 2px; }
+.btn-go { background: linear-gradient(135deg,#c97fa8,#6b9cc4); color: #fff; border: none; border-radius: 50px; padding: 16px 50px; font-size: 16px; font-weight: 500; cursor: pointer; font-family: 'DM Sans',sans-serif; transition: transform .2s,box-shadow .2s; }
+.btn-go:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,127,168,.35); }
+
+.qz { max-width: 700px; margin: 0 auto; padding: 32px 24px 80px; }
+.prog-bar-bg { height: 5px; background: rgba(170,160,195,.18); border-radius: 10px; overflow: hidden; margin-bottom: 6px; }
+.prog-bar-fill { height: 100%; background: linear-gradient(90deg,#c97fa8,#6b9cc4,#5BCEFA); border-radius: 10px; transition: width .55s ease; }
+.prog-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--tx3); margin-bottom: 22px; }
+.sec-hd { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 20px 22px; margin-bottom: 18px; display: flex; gap: 16px; align-items: flex-start; }
+.sec-ico { font-size: 28px; flex-shrink: 0; }
+.sec-nm { font-family: 'Lora',serif; font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.sec-sub { font-size: 13px; color: var(--tx2); line-height: 1.6; }
+.sec-ref { font-size: 11px; color: var(--tx3); font-style: italic; margin-top: 4px; }
+
+.qcard { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 22px 22px 18px; margin-bottom: 13px; transition: border-color .2s; }
+.qcard:hover { border-color: var(--bdh); }
+.qnum { font-size: 10.5px; color: var(--tx3); text-transform: uppercase; letter-spacing: 1.1px; font-weight: 500; margin-bottom: 6px; }
+.qtag { display: inline-block; font-size: 10.5px; background: rgba(107,156,196,.11); color: var(--bl); border-radius: 6px; padding: 2px 9px; margin-bottom: 11px; font-weight: 500; }
+.qtext { font-family: 'Lora',serif; font-style: italic; font-size: 15.5px; color: var(--tx1); line-height: 1.72; margin-bottom: 16px; }
+
+/* LIKERT AGREE — rosa */
+.lk-agree,.lk-freq,.lk-int { display: flex; gap: 5px; flex-wrap: wrap; }
+.lk-agree .op,.lk-freq .op,.lk-int .op { flex: 1; min-width: 0; }
+.lk-agree .op input,.lk-freq .op input,.lk-int .op input { display: none; }
+.lk-agree .op label,.lk-freq .op label,.lk-int .op label { display: flex; flex-direction: column; align-items: center; gap: 5px; background: var(--bg); border: 1.5px solid var(--bd); border-radius: 10px; padding: 9px 5px 8px; cursor: pointer; transition: all .2s; font-size: 11px; color: var(--tx2); text-align: center; line-height: 1.3; min-height: 60px; justify-content: center; }
+.lk-agree .op input:checked+label { background: linear-gradient(135deg,rgba(201,127,168,.14),rgba(107,156,196,.1)); border-color: var(--pk); color: var(--tx1); font-weight: 500; }
+.lk-freq .op input:checked+label { background: linear-gradient(135deg,rgba(107,156,196,.15),rgba(91,206,250,.1)); border-color: var(--bl); color: var(--tx1); font-weight: 500; }
+.lk-int .op input:checked+label { background: linear-gradient(135deg,rgba(109,191,160,.14),rgba(107,156,196,.1)); border-color: var(--tl); color: var(--tx1); font-weight: 500; }
+.lk-agree .op label:hover,.lk-freq .op label:hover,.lk-int .op label:hover { border-color: var(--bdh); }
+.lk-dot { width: 8px; height: 8px; border-radius: 50%; border: 2px solid currentColor; flex-shrink: 0; }
+.lk-agree .op input:checked+label .lk-dot { background: var(--pk); border-color: var(--pk); }
+.lk-freq .op input:checked+label .lk-dot { background: var(--bl); border-color: var(--bl); }
+.lk-int .op input:checked+label .lk-dot { background: var(--tl); border-color: var(--tl); }
+
+/* SEMANTIC DIFFERENTIAL */
+.sem-wrap { display: flex; align-items: center; gap: 10px; }
+.sem-pole { font-size: 12.5px; color: var(--tx2); flex: 0 0 auto; max-width: 120px; line-height: 1.4; }
+.sem-pole.r { text-align: right; }
+.sem-opts { display: flex; gap: 4px; flex: 1; justify-content: center; }
+.sem-opts .op { flex: 1; max-width: 50px; }
+.sem-opts .op input { display: none; }
+.sem-opts .op label { display: block; background: var(--bg); border: 1.5px solid var(--bd); border-radius: 8px; cursor: pointer; transition: all .2s; }
+.sem-opts .op:nth-child(1) label { height: 32px; }
+.sem-opts .op:nth-child(2) label { height: 39px; margin-top: -3px; }
+.sem-opts .op:nth-child(3) label { height: 44px; margin-top: -6px; }
+.sem-opts .op:nth-child(4) label { height: 39px; margin-top: -3px; }
+.sem-opts .op:nth-child(5) label { height: 32px; }
+.sem-opts .op input:checked+label { background: linear-gradient(135deg,rgba(155,123,196,.18),rgba(201,127,168,.12)); border-color: var(--lv); }
+.sem-opts .op label:hover { border-color: var(--bdh); background: rgba(155,123,196,.08); }
+
+/* YES/NO/A VECES */
+.yn-wrap { display: flex; gap: 8px; flex-wrap: wrap; }
+.yn-wrap .op { flex: 1; min-width: 85px; }
+.yn-wrap .op input { display: none; }
+.yn-wrap .op label { display: block; background: var(--bg); border: 1.5px solid var(--bd); border-radius: 10px; padding: 11px 14px; cursor: pointer; font-size: 13.5px; color: var(--tx2); text-align: center; transition: all .2s; }
+.yn-wrap .op input:checked+label { background: linear-gradient(135deg,rgba(201,127,168,.16),rgba(107,156,196,.1)); border-color: var(--pk); color: var(--tx1); font-weight: 500; }
+.yn-wrap .op label:hover { border-color: var(--bdh); }
+
+/* CHOICE 4 / CHOICE 5 */
+.ch-grid { display: grid; gap: 8px; }
+.ch-grid.c4 { grid-template-columns: 1fr 1fr; }
+.ch-grid.c5 { grid-template-columns: 1fr; }
+.ch-grid .op input { display: none; }
+.ch-grid .op label { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1.5px solid var(--bd); border-radius: 10px; padding: 11px 15px; cursor: pointer; font-size: 13.5px; color: var(--tx2); transition: all .2s; line-height: 1.45; }
+.ch-grid .op input:checked+label { background: linear-gradient(135deg,rgba(201,127,168,.14),rgba(107,156,196,.1)); border-color: var(--bl); color: var(--tx1); font-weight: 500; }
+.ch-grid .op label:hover { border-color: var(--bdh); }
+.ch-radio { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--tx3); flex-shrink: 0; transition: all .2s; }
+.ch-grid .op input:checked+label .ch-radio { background: var(--bl); border-color: var(--bl); }
+
+/* SCALE 0-10 */
+.sc10 { display: flex; gap: 4px; flex-wrap: wrap; }
+.sc10 .op { flex: 1; min-width: 0; }
+.sc10 .op input { display: none; }
+.sc10 .op label { display: block; background: var(--bg); border: 1.5px solid var(--bd); border-radius: 8px; padding: 9px 2px; cursor: pointer; font-size: 13px; color: var(--tx2); text-align: center; transition: all .2s; font-weight: 500; }
+.sc10 .op input:checked+label { background: linear-gradient(135deg,rgba(201,127,168,.18),rgba(155,123,196,.14)); border-color: var(--pk); color: var(--tx1); }
+.sc10 .op label:hover { border-color: var(--bdh); }
+.sc10-lbl { display: flex; justify-content: space-between; font-size: 11px; color: var(--tx3); margin-top: 5px; padding: 0 2px; }
+
+/* ICON OPTIONS */
+.ico-opts { display: grid; grid-template-columns: repeat(auto-fit,minmax(120px,1fr)); gap: 9px; }
+.ico-opts .op input { display: none; }
+.ico-opts .op label { display: block; background: var(--bg); border: 1.5px solid var(--bd); border-radius: 12px; padding: 16px 12px; cursor: pointer; text-align: center; font-size: 13px; color: var(--tx2); transition: all .2s; line-height: 1.5; }
+.ico-opts .op label .io-ico { font-size: 28px; display: block; margin-bottom: 7px; }
+.ico-opts .op input:checked+label { background: linear-gradient(135deg,rgba(201,127,168,.14),rgba(109,191,160,.1)); border-color: var(--pk); color: var(--tx1); font-weight: 500; }
+.ico-opts .op label:hover { border-color: var(--bdh); }
+
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--bd); }
+.btn-nav { border: 1.5px solid var(--bdh); background: var(--card); color: var(--tx1); border-radius: 50px; padding: 12px 28px; font-size: 14px; cursor: pointer; font-family: 'DM Sans',sans-serif; transition: all .2s; font-weight: 500; }
+.btn-nav:hover { border-color: var(--pk); color: var(--pk); }
+.btn-nav.pri { background: linear-gradient(135deg,#c97fa8,#6b9cc4); border: none; color: #fff; }
+.btn-nav.pri:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,127,168,.32); color: #fff; }
+.btn-nav:disabled { opacity: .38; cursor: not-allowed; transform: none; box-shadow: none; }
+.warn-msg { font-size: 12.5px; color: #d9607a; text-align: center; margin-top: 9px; display: none; }
+
+/* RESULTS */
+.res { max-width: 740px; margin: 0 auto; padding: 52px 24px 80px; }
+.res-hero { text-align: center; margin-bottom: 40px; }
+.res-badge { display: inline-block; padding: 6px 20px; border-radius: 50px; font-size: 12px; font-weight: 500; letter-spacing: .9px; text-transform: uppercase; margin-bottom: 18px; }
+.res-title { font-family: 'Lora',serif; font-size: clamp(24px,4vw,34px); font-weight: 600; line-height: 1.25; margin-bottom: 14px; }
+.res-intro { font-size: 15px; color: var(--tx2); line-height: 1.82; max-width: 560px; margin: 0 auto; }
+
+.profile-box { border-radius: 20px; padding: 28px 30px; margin-bottom: 28px; border: 1.5px solid; }
+.profile-box h2 { font-family: 'Lora',serif; font-size: 21px; font-weight: 600; margin-bottom: 14px; }
+.profile-box p { font-size: 15px; line-height: 1.82; margin-bottom: 12px; }
+.profile-box p:last-child { margin-bottom: 0; }
+
+.dim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+@media(max-width:560px){ .dim-grid { grid-template-columns: 1fr; } }
+.dim-card { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 18px 20px; }
+.dim-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
+.dim-ico { font-size: 21px; }
+.dim-nm { font-size: 14px; font-weight: 500; flex: 1; color: var(--tx1); }
+.dim-pct { font-family: 'Lora',serif; font-size: 20px; font-weight: 600; }
+.dim-bar-bg { height: 7px; background: rgba(170,160,195,.17); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+.dim-bar-fill { height: 100%; border-radius: 10px; transition: width 1.3s ease; }
+.dim-note { font-size: 12.5px; color: var(--tx2); line-height: 1.65; }
+
+.patt-sec { margin-bottom: 28px; }
+.patt-sec h2 { font-family: 'Lora',serif; font-size: 20px; font-weight: 600; margin-bottom: 16px; }
+.patt-item { display: flex; gap: 14px; align-items: flex-start; background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; }
+.patt-ico { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.patt-txt { font-size: 14px; color: var(--tx2); line-height: 1.72; }
+.patt-txt strong { color: var(--tx1); font-weight: 500; }
+
+.steps-box { background: linear-gradient(135deg,#fef2f8,#eff5ff,#f0faf5); border: 1px solid rgba(201,127,168,.22); border-radius: 20px; padding: 26px 28px; margin-bottom: 28px; }
+.steps-box h2 { font-family: 'Lora',serif; font-size: 19px; font-weight: 600; margin-bottom: 16px; }
+.step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 13px; }
+.step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--pk); color: #fff; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-txt { font-size: 14px; color: var(--tx2); line-height: 1.7; }
+.step-txt strong { color: var(--tx1); font-weight: 500; }
+
+.res-resources h2 { font-family: 'Lora',serif; font-size: 20px; font-weight: 600; margin-bottom: 14px; }
+.r-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 9px; margin-bottom: 28px; }
+.r-card { background: var(--card); border: 1px solid var(--bd); border-radius: 12px; padding: 13px 15px; }
+.r-type { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--pk); font-weight: 500; margin-bottom: 4px; }
+.r-title { font-size: 13px; font-weight: 500; color: var(--tx1); line-height: 1.4; margin-bottom: 3px; }
+.r-author { font-size: 12px; color: var(--tx3); font-style: italic; }
+
+.biblio-box { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 20px 24px; margin-bottom: 28px; }
+.biblio-box h3 { font-family: 'Lora',serif; font-size: 16px; font-weight: 600; margin-bottom: 13px; }
+.biblio-box ul { list-style: none; display: grid; gap: 7px; }
+.biblio-box li { font-size: 12.5px; color: var(--tx2); padding-left: 16px; position: relative; line-height: 1.62; }
+.biblio-box li::before { content: '·'; position: absolute; left: 4px; color: var(--pk); }
+
+.disclaimer { font-size: 13px; color: var(--tx3); text-align: center; line-height: 1.7; font-style: italic; margin-bottom: 20px; }
+.btn-restart { border: 1.5px solid var(--bdh); background: var(--card); color: var(--tx1); border-radius: 50px; padding: 13px 38px; font-size: 14.5px; cursor: pointer; font-family: 'DM Sans',sans-serif; font-weight: 500; transition: all .2s; display: block; margin: 0 auto; }
+.btn-restart:hover { border-color: var(--pk); color: var(--pk); }
+
+@media(max-width:480px){
+  .ch-grid.c4 { grid-template-columns: 1fr; }
+  .sem-wrap { flex-direction: column; gap: 8px; }
+  .sem-pole { max-width: 100%; text-align: left !important; }
+  .sem-opts { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+
+<!-- WELCOME -->
+<div id="sc-welcome" class="screen active">
+<div class="wc">
+  <div class="wc-orb">🌸</div>
+  <h1>Explora tu identidad de género</h1>
+  <p class="wc-tagline">Un espacio de autoconocimiento para personas trans y de género diverso</p>
+  <div class="wc-desc">
+    <p>Este test fue construido a partir de investigación científica, teoría de género, filosofía, estudios trans y experiencias de vida documentadas de personas de todo el mundo, incluyendo culturas con identidades de género fuera del binario occidental.</p>
+    <p>No busca diagnosticar ni etiquetar: busca acompañarte en la exploración de tu experiencia. Las preguntas utilizan <strong>7 formatos diferentes</strong> para capturar matices que una sola escala no puede recoger. <strong>Tu identidad de género no está determinada por tu orientación sexual.</strong></p>
+    <p>Al final recibirás un perfil narrativo aproximado basado en tus respuestas, con reflexiones por dimensión y recursos para continuar explorando.</p>
+  </div>
+  <div class="wc-notice"><strong>Privacidad total:</strong> Este test corre íntegramente en tu navegador. Ninguna respuesta sale de tu dispositivo ni se almacena en ningún servidor externo.</div>
+  <div class="chips">
+    <div class="chip"><em>🧠</em><strong>Identidad interna</strong>10 preguntas</div>
+    <div class="chip"><em>🫀</em><strong>Cuerpo y dysphoria</strong>9 preguntas</div>
+    <div class="chip"><em>🎭</em><strong>Expresión social</strong>10 preguntas</div>
+    <div class="chip"><em>📖</em><strong>Historia personal</strong>9 preguntas</div>
+    <div class="chip"><em>🌍</em><strong>Cultura y entorno</strong>9 preguntas</div>
+    <div class="chip"><em>🌱</em><strong>Bienestar y futuro</strong>8 preguntas</div>
+  </div>
+  <button class="btn-go" onclick="startQuiz()">Comenzar exploración →</button>
+</div>
+</div>
+
+<!-- QUIZ -->
+<div id="sc-quiz" class="screen">
+<div class="qz">
+  <div class="prog-bar-bg"><div class="prog-bar-fill" id="prog" style="width:0%"></div></div>
+  <div class="prog-meta"><span id="sec-lbl"></span><span id="q-ctr"></span></div>
+  <div id="sec-hd"></div>
+  <div id="qs-block"></div>
+  <p class="warn-msg" id="warn">Por favor responde todas las preguntas antes de continuar.</p>
+  <div class="qz-nav">
+    <button class="btn-nav" id="btn-back" onclick="goBack()">← Atrás</button>
+    <button class="btn-nav pri" id="btn-next" onclick="goNext()">Siguiente →</button>
+  </div>
+</div>
+</div>
+
+<!-- RESULTS -->
+<div id="sc-results" class="screen">
+<div class="res">
+  <div class="res-hero" id="res-hero"></div>
+  <div id="res-profile"></div>
+  <div class="dim-grid" id="res-dims"></div>
+  <div class="patt-sec" id="res-patt"></div>
+  <div class="steps-box" id="res-steps"></div>
+  <div class="res-resources" id="res-resources"></div>
+  <div class="biblio-box" id="res-biblio"></div>
+  <p class="disclaimer">Este test es una herramienta de autoconocimiento, no un diagnóstico clínico. Si deseas acompañamiento, busca un/a/e profesional de salud mental con formación en diversidad de género.</p>
+  <button class="btn-restart" onclick="startQuiz()">← Reiniciar test</button>
+</div>
+</div>
+
+<script>
+const SECS=[
+  {id:'int',lbl:'Identidad interna',ico:'🧠',nm:'¿Quién soy en mi interior?',sub:'Explora tu sentido interno de identidad de género, más allá de la presentación o la atracción sexual.',ref:'Butler (1990), WPATH SoC 8 (2022), Nieder et al. (2020), Benestad (2020)',col:'#c97fa8',grad:'linear-gradient(90deg,#c97fa8,#d49abb)'},
+  {id:'bod',lbl:'Cuerpo y dysphoria',ico:'🫀',nm:'Mi relación con el cuerpo',sub:'Reflexiona sobre cómo experimentas tu cuerpo y la posible discordancia con tu identidad interna.',ref:'Fausto-Sterling (2000), DSM-5 / ICD-11 HA60, Serano (2007), Lev (2004)',col:'#6b9cc4',grad:'linear-gradient(90deg,#6b9cc4,#88b5d5)'},
+  {id:'exp',lbl:'Expresión social',ico:'🎭',nm:'Cómo me presento al mundo',sub:'Examina tu expresión de género y la distancia entre quién eres y cómo te muestras públicamente.',ref:'Bornstein (1994), Stone (1992), Preciado (2002), Connell (2005)',col:'#6dbfa0',grad:'linear-gradient(90deg,#6dbfa0,#89ccb4)'},
+  {id:'his',lbl:'Historia personal',ico:'📖',nm:'Mi trayectoria de vida',sub:'Explora señales tempranas, momentos clave y la evolución de tu relación con el género a lo largo del tiempo.',ref:'Feinberg (1993, 1996), Califia (2002), PFLAG (2019), Drescher (2014)',col:'#c9a06b',grad:'linear-gradient(90deg,#c9a06b,#d8b484)'},
+  {id:'cul',lbl:'Cultura y entorno',ico:'🌍',nm:'Mi contexto cultural y social',sub:'Considera la influencia del entorno, la familia, la cultura y la comunidad en tu identidad de género.',ref:'Herdt (1994), Lugones (2008), Towle & Morgan (2002), Meyer (2003)',col:'#9b7bc4',grad:'linear-gradient(90deg,#9b7bc4,#b294d5)'},
+  {id:'wb',lbl:'Bienestar y futuro',ico:'🌱',nm:'Mi bienestar y perspectivas',sub:'Reflexiona sobre tu estado emocional actual, tus necesidades y hacia dónde te diriges.',ref:'Tedeschi & Calhoun (2004), Singh (2013), Hendricks & Testa (2012)',col:'#5BCEFA',grad:'linear-gradient(90deg,#5BCEFA,#7cd6f8)'},
+];
+
+// TIPOS: agree, freq, int, yn3, ch4, ch5, sem, sc10, ico
+const QS=[
+  // ── SECCIÓN 0: IDENTIDAD INTERNA ───────────────────
+  {s:0,type:'agree',tag:'Sentido interno',text:'El género que me fue asignado al nacer refleja con precisión quién soy internamente.',rev:true},
+  {s:0,type:'freq',tag:'Autopercepción',text:'¿Con qué frecuencia sientes que tu identidad interna difiere de cómo el mundo te ve y te trata en términos de género?',rev:false},
+  {s:0,type:'int',tag:'Incongruencia',text:'¿Qué tan intensa es la sensación de incongruencia entre el género asignado y quien sientes que eres en realidad?',rev:false},
+  {s:0,type:'sem',tag:'Espectro interno',text:'¿Dónde te ubicas en este continuo en tu experiencia interna del género?',pL:'Me identifico plenamente con el género asignado',pR:'No me identifico nada con el género asignado',rev:false},
+  {s:0,type:'ch5',tag:'Descripción interna',text:'¿Cuál de estas afirmaciones describe mejor tu vivencia interna del género en este momento?',opts:['Me identifico con el género asignado sin cuestionamientos','Hay dudas leves pero mayormente me identifico con él','Experimento ambigüedad genuina: ni uno ni otro me define del todo','Me identifico con un género diferente al asignado','Me identifico fuera del binario o con múltiples géneros a la vez']},
+  {s:0,type:'yn3',tag:'Fluidez del género',text:'¿Tu sentido de identidad de género varía según el día, el estado emocional o el contexto social?',opts:['Sí, es fluido y cambia','No, es bastante estable','A veces, en ciertos contextos','No lo he notado o analizado']},
+  {s:0,type:'freq',tag:'Falta de lenguaje',text:'¿Con qué frecuencia sientes que ninguna etiqueta de género disponible te describe con exactitud?',rev:false},
+  {s:0,type:'agree',tag:'Independencia del contexto',text:'Aunque desaparecieran todas las normas sociales de género, creo que seguiría sintiéndome igual respecto a mi identidad.',rev:false},
+  {s:0,type:'sc10',tag:'Certeza actual',text:'Del 0 al 10, ¿qué tan seguro/a/e te sientes de tu identidad de género en este momento de tu vida?',lL:'Nada seguro/a/e',lR:'Completamente seguro/a/e',rev:false},
+  {s:0,type:'int',tag:'Identidad plural',text:'¿Con qué intensidad sientes que puedes identificarte con más de un género simultáneamente?',rev:false},
+
+  // ── SECCIÓN 1: CUERPO Y DYSPHORIA ──────────────────
+  {s:1,type:'freq',tag:'Dysphoria general',text:'¿Con qué frecuencia experimentas malestar al observar o pensar en características físicas de tu cuerpo vinculadas al sexo asignado?',rev:false},
+  {s:1,type:'int',tag:'Intensidad del malestar',text:'Cuando ese malestar corporal ocurre, ¿qué tan intenso suele ser en una escala subjetiva?',rev:false},
+  {s:1,type:'sem',tag:'Relación con el espejo',text:'Cuando te ves en el espejo, ¿cómo te sientes generalmente en relación a tu género?',pL:'En paz total con lo que veo',pR:'Profunda incomodidad con lo que veo',rev:false},
+  {s:1,type:'yn3',tag:'Euforia de género',text:'¿Has experimentado "euforia de género": una sensación de alegría o bienestar intenso cuando alguien te reconoce o cuando te expresas conforme a tu identidad?',opts:['Sí, claramente y con frecuencia','No lo he sentido nunca','Sí, de forma leve o esporádica','No sé a qué se refiere ese término']},
+  {s:1,type:'freq',tag:'Nombre y pronombres',text:'¿Con qué frecuencia sientes malestar al escuchar el nombre o pronombres del género asignado usados para referirte?',rev:false},
+  {s:1,type:'ch4',tag:'Características físicas',text:'¿Cuál describe mejor tu relación con las características sexuales primarias y secundarias de tu cuerpo?',opts:['Las acepto sin conflicto significativo','Hay incomodidad pero la manejo','Me generan malestar con frecuencia','Son una fuente de angustia importante en mi vida']},
+  {s:1,type:'agree',tag:'Deseo de cambio',text:'He imaginado o deseado que mi cuerpo tuviera características físicas de otro género de manera persistente.',rev:false},
+  {s:1,type:'int',tag:'Incomodidad vocal',text:'¿Qué tan incómodo/a/e te hace sentir tu voz (timbre, tono, registro) en relación a tu identidad de género?',rev:false},
+  {s:1,type:'ico',tag:'Estado emocional corporal',text:'¿Cuál de estas imágenes describe mejor tu relación con tu cuerpo hoy?',opts:[{ico:'🕊️',txt:'Paz y aceptación'},{ico:'⚖️',txt:'Tensión manejable'},{ico:'🌧️',txt:'Malestar frecuente'},{ico:'⛈️',txt:'Angustia intensa'}]},
+
+  // ── SECCIÓN 2: EXPRESIÓN SOCIAL ────────────────────
+  {s:2,type:'freq',tag:'Autenticidad expresiva',text:'¿Con qué frecuencia sientes que tu presentación externa (ropa, gestos, tono de voz) refleja auténticamente quién eres en términos de género?',rev:true},
+  {s:2,type:'int',tag:'Exploración privada',text:'¿Con qué intensidad has explorado en privado formas de presentarte que difieren de tu presentación pública habitual?',rev:false},
+  {s:2,type:'agree',tag:'Performatividad social',text:'Siento que en ciertos contextos "interpreto" o "actúo" un género que en realidad no me pertenece.',rev:false},
+  {s:2,type:'ch5',tag:'Tu nombre actual',text:'¿Cuál es tu relación con el nombre que tienes actualmente?',opts:['Me representa muy bien, no lo cambiaría','Me representa parcialmente, aunque no es perfecto','Me resulta neutro, no me afecta en un sentido u otro','Me genera cierta incomodidad al escucharlo','Prefiero o ya utilizo un nombre diferente en ciertos contextos']},
+  {s:2,type:'ico',tag:'Pronombres preferidos',text:'¿Con qué pronombres te sientes más cómodo/a/e internamente?',opts:[{ico:'💙',txt:'Él / His'},{ico:'💗',txt:'Ella / Her'},{ico:'💜',txt:'Elle / They'},{ico:'🤍',txt:'Cualquiera / Sin preferencia'}]},
+  {s:2,type:'freq',tag:'Ansiedad en espacios de género',text:'¿Con qué frecuencia los espacios segregados por género (baños, vestidores, formularios) te generan incomodidad o ansiedad?',rev:false},
+  {s:2,type:'sc10',tag:'Brecha expresiva',text:'Del 0 al 10, ¿qué tan grande sientes la brecha entre cómo te expresas externamente y cómo te sientes internamente?',lL:'Sin brecha',lR:'Brecha enorme',rev:false},
+  {s:2,type:'agree',tag:'Validación externa',text:'Para mí es importante que las personas me perciban y reconozcan del género con el que me identifico.',rev:false},
+  {s:2,type:'freq',tag:'Referentes trans',text:'¿Con qué frecuencia consumes contenido, testimonios o experiencias de personas trans y no binarias?',rev:false},
+  {s:2,type:'yn3',tag:'Pasos concretos',text:'¿Has tomado o considerado pasos de afirmación social (usar un nombre diferente, cambiar pronombres con alguien, modificar tu presentación)?',opts:['Sí, ya lo estoy haciendo','Lo he considerado seriamente','Apenas lo estoy pensando','No lo he contemplado aún']},
+
+  // ── SECCIÓN 3: HISTORIA PERSONAL ───────────────────
+  {s:3,type:'agree',tag:'Señales en la infancia',text:'De niño/a/e, recuerdo haber sentido que el género que me asignaban no correspondía a quién era internamente.',rev:false},
+  {s:3,type:'freq',tag:'Juego y socialización',text:'¿Con qué frecuencia de pequeño/a/e preferías actividades, juguetes o grupos de amigos que no correspondían a las expectativas del género asignado?',rev:false},
+  {s:3,type:'int',tag:'Malestar en la pubertad',text:'¿Qué tan intensa fue la incomodidad, angustia o tristeza que sentiste ante los cambios físicos de la pubertad?',rev:false},
+  {s:3,type:'ch4',tag:'Modelos de identidad',text:'De adolescente, ¿con qué tipo de personas te identificabas o admirabas en términos de género?',opts:['Personas del mismo género asignado','Personas del género opuesto al asignado','Figuras andróginas, no binarias o que rompían normas de género','No tenía modelos claros o no lo analicé entonces']},
+  {s:3,type:'agree',tag:'Vida en secreto',text:'He guardado en secreto sentimientos, pensamientos o comportamientos relacionados con mi género por miedo al juicio o la reacción de los demás.',rev:false},
+  {s:3,type:'freq',tag:'Momentos de reconocimiento',text:'¿Con qué frecuencia recuerdas momentos específicos de tu vida donde sentiste que tu género era diferente al asignado?',rev:false},
+  {s:3,type:'sem',tag:'Impacto de la represión',text:'¿En qué medida sientes que reprimir o esconder tu identidad de género ha impactado tu vida?',pL:'No ha tenido impacto significativo',pR:'Ha tenido un impacto muy profundo',rev:false},
+  {s:3,type:'ico',tag:'Etapa de cuestionamiento',text:'¿En qué etapa empezaste a cuestionarte seriamente tu identidad de género?',opts:[{ico:'🧒',txt:'Infancia'},{ico:'🧑',txt:'Adolescencia'},{ico:'🧑‍🦱',txt:'Adultez temprana'},{ico:'🧔',txt:'Adultez posterior'}]},
+  {s:3,type:'yn3',tag:'Proceso activo',text:'¿Sientes que estás actualmente en un proceso de aceptación y reconocimiento de tu identidad de género?',opts:['Sí, claramente','No lo creo así','Apenas estoy comenzando','No lo sé con certeza']},
+
+  // ── SECCIÓN 4: CULTURA Y ENTORNO ───────────────────
+  {s:4,type:'int',tag:'Apertura familiar',text:'¿Qué tan abierta o receptiva sientes que es tu familia ante las identidades trans y no binarias?',rev:false},
+  {s:4,type:'agree',tag:'Red de apoyo',text:'Cuento con personas en mi entorno cercano que me apoyarían activamente en mi proceso de identidad de género.',rev:false},
+  {s:4,type:'freq',tag:'Presión de conformidad',text:'¿Con qué frecuencia recibes presión externa (familia, religión, trabajo, cultura) para comportarte conforme al género asignado?',rev:true},
+  {s:4,type:'ch4',tag:'Clima social',text:'¿Cómo describirías el nivel de apoyo de tu entorno actual hacia las identidades trans y de género diverso?',opts:['Muy abierto y celebratorio','Parcialmente comprensivo y tolerante','Mayormente hostil o incomprensivo','Mi entorno desconoce completamente mi identidad real']},
+  {s:4,type:'yn3',tag:'Referentes culturales no binarios',text:'¿Conoces o sientes conexión con identidades de género de otras culturas fuera del binario occidental (muxe zapoteco/a, hijra del sur de Asia, two-spirit indígena, fa\'afafine samoano/a, kathoey tailandés/a)?',opts:['Sí, me identifico con alguna de ellas','Las conozco pero no me identifico','No las conocía','Me gustaría explorar esto más']},
+  {s:4,type:'agree',tag:'Normas restrictivas',text:'Las normas de género de mi cultura o familia han limitado activamente mi expresión y desarrollo auténtico.',rev:false},
+  {s:4,type:'sc10',tag:'Seguridad del entorno',text:'Del 0 al 10, ¿qué tan seguro/a/e te sientes en tu entorno actual para expresar libremente tu identidad de género?',lL:'Nada seguro/a/e',lR:'Completamente seguro/a/e',rev:false},
+  {s:4,type:'freq',tag:'Representación visible',text:'¿Con qué frecuencia ves representación positiva y diversa de personas trans o no binarias en tu contexto cultural cotidiano?',rev:false},
+  {s:4,type:'ico',tag:'Principal fuente de apoyo',text:'¿De dónde obtienes principalmente apoyo en relación a tu identidad de género?',opts:[{ico:'👨‍👩‍👧',txt:'Mi familia'},{ico:'👯',txt:'Amistades cercanas'},{ico:'💻',txt:'Comunidad online'},{ico:'🔍',txt:'Todavía lo estoy buscando'}]},
+
+  // ── SECCIÓN 5: BIENESTAR Y FUTURO ──────────────────
+  {s:5,type:'agree',tag:'Impacto potencial',text:'Vivir de manera más congruente con mi identidad de género mejoraría significativamente mi bienestar emocional y calidad de vida.',rev:false},
+  {s:5,type:'freq',tag:'Ansiedad de género',text:'¿Con qué frecuencia experimentas ansiedad, tristeza o baja autoestima que vinculas directamente con tu identidad de género?',rev:false},
+  {s:5,type:'sc10',tag:'Bienestar actual',text:'Del 0 al 10, ¿cómo evaluarías tu bienestar emocional general en este momento de tu vida?',lL:'Muy bajo',lR:'Muy alto',rev:false},
+  {s:5,type:'int',tag:'Fortaleza interna',text:'¿Qué tan sólidas sientes tus herramientas internas (autoestima, red de apoyo, resiliencia) para afrontar los retos de tu identidad?',rev:false},
+  {s:5,type:'yn3',tag:'Apoyo profesional',text:'¿Has hablado o considerarías hablar con un/a/e profesional de salud mental especializado/a en identidad y diversidad de género?',opts:['Sí, ya lo he hecho','Lo consideraría si tuviera acceso','No lo creo necesario para mí','No tengo acceso a esa opción ahora mismo']},
+  {s:5,type:'ch5',tag:'Momento del proceso',text:'¿Cuál describe mejor en qué momento de tu proceso te encuentras ahora mismo?',opts:['Acabo de empezar a cuestionarme','Tengo preguntas pero sin conclusiones todavía','Tengo claridad pero no he dado pasos externos aún','Estoy dando pasos activos de afirmación o transición','Ya vivo de manera plenamente congruente con mi identidad']},
+  {s:5,type:'sem',tag:'Visión de futuro',text:'Cuando imaginas tu vida en 5 años en relación a tu género:',pL:'Me veo viviendo igual que hoy',pR:'Me veo viviendo de forma muy diferente y más auténtica',rev:false},
+  {s:5,type:'ico',tag:'Necesidad principal',text:'¿Qué es lo que más necesitas ahora mismo en relación a tu identidad de género?',opts:[{ico:'📚',txt:'Información y lectura'},{ico:'🤝',txt:'Comunidad y apoyo'},{ico:'🧘',txt:'Tiempo y calma'},{ico:'🌟',txt:'Dar el siguiente paso'}]},
+];
+
+let curSec=0;
+const ANS={};
+
+function secQs(s){return QS.filter(q=>q.s===s);}
+function gIdx(s,i){return QS.filter(q=>q.s<s).length+i+1;}
+
+function startQuiz(){
+  curSec=0; Object.keys(ANS).forEach(k=>delete ANS[k]);
+  showSc('sc-quiz'); renderSec(0);
+}
+function showSc(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderSec(s){
+  const sec=SECS[s],qs=secQs(s);
+  document.getElementById('sec-hd').innerHTML=`<div class="sec-hd"><div class="sec-ico">${sec.ico}</div><div><div class="sec-nm">${sec.nm}</div><div class="sec-sub">${sec.sub}</div><div class="sec-ref">Fuentes: ${sec.ref}</div></div></div>`;
+  let html='';
+  qs.forEach((q,i)=>{
+    const n=gIdx(s,i),sv=ANS['q'+n];
+    html+=`<div class="qcard"><div class="qnum">Pregunta ${n} de ${QS.length}</div><div class="qtag">${q.tag}</div><div class="qtext">${q.text}</div>${inp(q,n,sv)}</div>`;
+  });
+  document.getElementById('qs-block').innerHTML=html;
+  const st=QS.filter(q=>q.s<s).length+1,en=st+qs.length-1;
+  document.getElementById('sec-lbl').textContent=`${sec.ico} ${sec.lbl} · Sección ${s+1} de 6`;
+  document.getElementById('q-ctr').textContent=`Preguntas ${st}–${en} de ${QS.length}`;
+  document.getElementById('prog').style.width=Math.round(s/6*100)+'%';
+  document.getElementById('btn-back').disabled=s===0;
+  document.getElementById('btn-next').textContent=s===5?'Ver mi perfil →':'Siguiente →';
+  document.getElementById('warn').style.display='none';
+}
+
+function inp(q,n,sv){
+  if(q.type==='agree')return lk(n,sv,['Totalmente en desacuerdo','En desacuerdo','Neutral','De acuerdo','Totalmente de acuerdo'],'lk-agree');
+  if(q.type==='freq') return lk(n,sv,['Nunca','Rara vez','A veces','Con frecuencia','Siempre'],'lk-freq');
+  if(q.type==='int')  return lk(n,sv,['Nada','Muy poco','Algo','Bastante','Intensamente'],'lk-int');
+  if(q.type==='yn3')  return yn(n,sv,q.opts);
+  if(q.type==='ch4')  return ch(n,sv,q.opts,'c4');
+  if(q.type==='ch5')  return ch(n,sv,q.opts,'c5');
+  if(q.type==='sem')  return sem(n,sv,q.pL,q.pR);
+  if(q.type==='sc10') return sc10(n,sv,q.lL,q.lR);
+  if(q.type==='ico')  return ico(n,sv,q.opts);
+  return '';
+}
+function lk(n,sv,lbs,cls){
+  return `<div class="${cls}">`+lbs.map((l,i)=>{const v=i+1,ck=sv==v?'checked':'';return`<div class="op"><input type="radio" name="q${n}" id="q${n}_${v}" value="${v}" ${ck}><label for="q${n}_${v}"><div class="lk-dot"></div>${l}</label></div>`;}).join('')+`</div>`;
+}
+function yn(n,sv,opts){
+  return `<div class="yn-wrap">`+opts.map((o,i)=>{const v=i+1,ck=sv==v?'checked':'';return`<div class="op"><input type="radio" name="q${n}" id="q${n}_${v}" value="${v}" ${ck}><label for="q${n}_${v}">${o}</label></div>`;}).join('')+`</div>`;
+}
+function ch(n,sv,opts,cls){
+  return `<div class="ch-grid ${cls}">`+opts.map((o,i)=>{const v=i+1,ck=sv==v?'checked':'';return`<div class="op"><input type="radio" name="q${n}" id="q${n}_${v}" value="${v}" ${ck}><label for="q${n}_${v}"><div class="ch-radio"></div>${o}</label></div>`;}).join('')+`</div>`;
+}
+function sem(n,sv,pL,pR){
+  return `<div class="sem-wrap"><div class="sem-pole">${pL}</div><div class="sem-opts">`+[1,2,3,4,5].map(v=>{const ck=sv==v?'checked':'';return`<div class="op"><input type="radio" name="q${n}" id="q${n}_${v}" value="${v}" ${ck}><label for="q${n}_${v}"></label></div>`;}).join('')+`</div><div class="sem-pole r">${pR}</div></div>`;
+}
+function sc10(n,sv,lL,lR){
+  return `<div class="sc10">`+[1,2,3,4,5,6,7,8,9,10].map(v=>{const ck=sv==v?'checked':'';return`<div class="op"><input type="radio" name="q${n}" id="q${n}_${v}" value="${v}" ${ck}><label for="q${n}_${v}">${v}</label></div>`;}).join('')+`</div><div class="sc10-lbl"><span>${lL}</span><span>${lR}</span></div>`;
+}
+function ico(n,sv,opts){
+  return `<div class="ico-opts">`+opts.map((o,i)=>{const v=i+1,ck=sv==v?'checked':'';return`<div class="op"><input type="radio" name="q${n}" id="q${n}_${v}" value="${v}" ${ck}><label for="q${n}_${v}"><span class="io-ico">${o.ico}</span>${o.txt}</label></div>`;}).join('')+`</div>`;
+}
+
+function saveAns(){
+  secQs(curSec).forEach((q,i)=>{
+    const n=gIdx(curSec,i),sel=document.querySelector(`input[name="q${n}"]:checked`);
+    if(sel)ANS['q'+n]=parseInt(sel.value);
+  });
+}
+function allAns(){
+  return secQs(curSec).every((q,i)=>{
+    const n=gIdx(curSec,i);
+    return ANS['q'+n]!==undefined||document.querySelector(`input[name="q${n}"]:checked`);
+  });
+}
+function goNext(){
+  saveAns();
+  if(!allAns()){document.getElementById('warn').style.display='block';return;}
+  document.getElementById('warn').style.display='none';
+  if(curSec<5){curSec++;renderSec(curSec);window.scrollTo({top:0,behavior:'smooth'});}
+  else showResults();
+}
+function goBack(){
+  saveAns();
+  if(curSec>0){curSec--;renderSec(curSec);window.scrollTo({top:0,behavior:'smooth'});}
+}
+
+// ── SCORING ──────────────────────────────────────────
+function raw(q,val){
+  if(!val)return null;
+  let v;
+  if(['agree','freq','int'].includes(q.type))v=val/5;
+  else if(q.type==='yn3'){const m={1:1,2:0,3:0.6,4:0.45};v=m[val]??0.5;}
+  else if(q.type==='ch4')v=(val-1)/3;
+  else if(q.type==='ch5')v=(val-1)/4;
+  else if(q.type==='sem')v=(val-1)/4;
+  else if(q.type==='sc10')v=val/10;
+  else if(q.type==='ico')v=(val-1)/3;
+  else v=val/5;
+  if(q.rev)v=1-v;
+  return Math.min(1,Math.max(0,v));
+}
+function dimScore(s){
+  const qs=secQs(s);
+  let tot=0,cnt=0;
+  qs.forEach((q,i)=>{const n=gIdx(s,i);const v=raw(q,ANS['q'+n]);if(v!==null){tot+=v;cnt++;}});
+  return cnt>0?Math.round((tot/cnt)*100):0;
+}
+
+// ── RESULTS ──────────────────────────────────────────
+function showResults(){
+  showSc('sc-results');
+  const sc=SECS.map((_,i)=>dimScore(i));
+  const avg=Math.round(sc.reduce((a,b)=>a+b,0)/6);
+  buildRes(sc,avg);
+  setTimeout(()=>{document.querySelectorAll('.dim-bar-fill').forEach(b=>{b.style.width=b.dataset.t+'%';});},400);
+}
+
+function buildRes(sc,avg){
+  const [iS,bS,eS,hS,cS,wS]=sc;
+  const prof=getProf(sc,avg);
+
+  document.getElementById('res-hero').innerHTML=`
+    <div class="res-badge" style="background:${prof.bbg};color:${prof.bco}">${prof.badge}</div>
+    <h1 class="res-title">${prof.title}</h1>
+    <p class="res-intro">${prof.intro}</p>`;
+
+  document.getElementById('res-profile').innerHTML=`
+    <div class="profile-box" style="background:${prof.pbg};border-color:${prof.pbd}">
+      <h2>${prof.boxT}</h2>
+      ${prof.paras.map(p=>`<p>${p}</p>`).join('')}
+    </div>`;
+
+  // Dimensions
+  let dh='';
+  SECS.forEach((sec,i)=>{
+    dh+=`<div class="dim-card">
+      <div class="dim-hd"><div class="dim-ico">${sec.ico}</div><div class="dim-nm">${sec.lbl}</div>
+      <div class="dim-pct" style="color:${sec.col}">${sc[i]}<span style="font-size:13px">%</span></div></div>
+      <div class="dim-bar-bg"><div class="dim-bar-fill" style="background:${sec.grad};width:0%" data-t="${sc[i]}"></div></div>
+      <div class="dim-note">${dNote(i,sc[i])}</div></div>`;
+  });
+  document.getElementById('res-dims').innerHTML=dh;
+
+  // Patterns
+  const patts=getPatts(sc,avg);
+  document.getElementById('res-patt').innerHTML=`<h2>Patrones clave en tus respuestas</h2>`+patts.map(p=>`<div class="patt-item"><div class="patt-ico">${p.ico}</div><div class="patt-txt"><strong>${p.hd}</strong><br>${p.bd}</div></div>`).join('');
+
+  // Steps
+  const steps=getSteps(sc,avg);
+  document.getElementById('res-steps').innerHTML=`<h2>Posibles próximos pasos</h2>`+steps.map((s,i)=>`<div class="step"><div class="step-num">${i+1}</div><div class="step-txt">${s}</div></div>`).join('');
+
+  // Resources
+  const recs=[
+    {t:'El género en disputa',a:'Judith Butler, 1990',r:'Teoría'},
+    {t:'Whipping Girl',a:'Julia Serano, 2007',r:'Testimonio / Teoría'},
+    {t:'Gender Outlaw',a:'Kate Bornstein, 1994',r:'Ensayo / Autobiografía'},
+    {t:'Stone Butch Blues',a:'Leslie Feinberg, 1993',r:'Novela autobiográfica'},
+    {t:'Testo Junkie',a:'Paul B. Preciado, 2008',r:'Ensayo filosófico'},
+    {t:'WPATH Standards of Care v8',a:'Coleman et al., 2022',r:'Guía clínica'},
+    {t:'Sexing the Body',a:'Anne Fausto-Sterling, 2000',r:'Biología / Género'},
+    {t:'Third Sex, Third Gender',a:'Gilbert Herdt (ed.), 1994',r:'Antropología'},
+    {t:'Trans Bodies, Trans Selves',a:'Erickson-Schroth (ed.), 2014',r:'Guía integral'},
+    {t:'Manifiesto Contrasexual',a:'Paul B. Preciado, 2002',r:'Filosofía'},
+    {t:'Minority Stress & Mental Health',a:'Ilan Meyer, 2003',r:'Psicología'},
+    {t:'Transgender Warriors',a:'Leslie Feinberg, 1996',r:'Historia'},
+  ];
+  document.getElementById('res-resources').innerHTML=`<h2>Lecturas y recursos recomendados</h2><div class="r-grid">`+recs.map(r=>`<div class="r-card"><div class="r-type">${r.r}</div><div class="r-title">${r.t}</div><div class="r-author">${r.a}</div></div>`).join('')+`</div>`;
+
+  document.getElementById('res-biblio').innerHTML=`<h3>Bibliografía científica de referencia</h3><ul>`+[
+    'Butler, J. (1990). <em>Gender Trouble: Feminism and the Subversion of Identity.</em> Routledge.',
+    'Coleman, E. et al. (2022). WPATH Standards of Care, Version 8. <em>Int. Journal of Transgender Health.</em>',
+    'Fausto-Sterling, A. (2000). <em>Sexing the Body: Gender Politics and the Construction of Sexuality.</em> Basic Books.',
+    'Serano, J. (2007). <em>Whipping Girl: A Transsexual Woman on Sexism.</em> Seal Press.',
+    'Preciado, P.B. (2008). <em>Testo Junkie: Sex, Drugs, and Biopolitics.</em> Espasa Calpe.',
+    'Herdt, G. (ed.) (1994). <em>Third Sex, Third Gender.</em> Zone Books.',
+    'Meyer, I.H. (2003). Prejudice, social stress, and mental health in LGB populations. <em>Psychological Bulletin, 129</em>(5).',
+    'Hendricks, M.L. & Testa, R.J. (2012). A conceptual framework for clinical work with transgender clients. <em>Professional Psychology.</em>',
+    'Nieder, T.O. et al. (2020). Individual treatment goals in transgender people. <em>Journal of Sexual Medicine.</em>',
+    'Drescher, J. (2014). Controversies in gender diagnoses. <em>LGBT Health, 1</em>(1).',
+    'Lugones, M. (2008). The Coloniality of Gender. <em>Worlds & Knowledges Otherwise.</em>',
+    'Singh, A.A. (2013). Transgender youth of color and resilience. <em>Sex Roles, 68.</em>',
+    'Towle, E.B. & Morgan, L.M. (2002). Romancing the transgender native. <em>GLQ, 8</em>(2-3).',
+    'Connell, R. (2005). <em>Masculinities</em> (2nd ed.). University of California Press.',
+    'OMS/ICD-11 (2022). HA60 Incongruencia de género. Organización Mundial de la Salud.',
+    'Tedeschi, R.G. & Calhoun, L.G. (2004). Posttraumatic growth. <em>Psychological Inquiry, 15</em>(1).',
+  ].map(b=>`<li>${b}</li>`).join('')+`</ul>`;
+}
+
+// ── PROFILE GENERATOR ────────────────────────────────
+function getProf(sc,avg){
+  const [iS,bS,eS,hS,cS,wS]=sc;
+  if(avg<=27){return{
+    badge:'Exploración inicial',bbg:'#f6f0fc',bco:'#9b7bc4',
+    title:'Estás al inicio de un camino de autoconocimiento',
+    intro:'Tus respuestas no muestran una discordancia marcada con el género asignado en este momento, aunque el hecho de estar aquí ya es significativo.',
+    pbg:'linear-gradient(135deg,#fdf8ff,#f8f6ff)',pbd:'rgba(155,123,196,.25)',
+    boxT:'Lo que tus respuestas sugieren aproximadamente',
+    paras:[
+      'En este momento, no parece haber una tensión muy significativa entre el género asignado al nacer y tu experiencia interna. Eso es completamente válido: no toda exploración de género conduce a una identidad trans o no binaria, y el autoconocimiento tiene valor en sí mismo.',
+      'El hecho de que estés haciendo este test, sin embargo, sugiere curiosidad o una inquietud genuina. Muchas personas trans y no binarias describen haber pasado por períodos largos sin reconocer ni nombrar lo que sentían, especialmente cuando el entorno no ofrecía lenguaje o modelos para ello.',
+      'Permítete explorar con calma, sin presión y sin necesidad de llegar a una conclusión. Leer testimonios de personas de experiencias diversas puede abrir perspectivas sin obligarte a etiquetarte.',
+    ]
+  };}
+  if(avg<=46){return{
+    badge:'Cuestionamiento activo',bbg:'#fff5fa',bco:'#c97fa8',
+    title:'Hay preguntas reales sobre tu identidad de género',
+    intro:'Tus respuestas revelan un cuestionamiento genuino y significativo. Hay tensiones entre el género asignado y tu experiencia interna que merecen atención y espacio.',
+    pbg:'linear-gradient(135deg,#fff5fa,#f5f9ff)',pbd:'rgba(201,127,168,.28)',
+    boxT:'Una lectura aproximada de tu experiencia',
+    paras:[
+      'Tus respuestas muestran una experiencia mixta: hay aspectos del género que te generan preguntas o malestar, aunque probablemente no en todos los contextos ni con la misma intensidad. Esta ambigüedad es completamente normal y no indica debilidad ni confusión.',
+      bS>50?'La dimensión corporal muestra una tensión más marcada que otras áreas. Esto puede ser una señal de que la relación con tu cuerpo es un elemento central en tu experiencia de género, algo muy común en personas que están en proceso de reconocer una identidad trans o no binaria.':'',
+      eS>50?'Hay una brecha entre cómo te presentas socialmente y cómo te sientes internamente. Muchas personas en procesos similares encuentran que pequeños pasos de afirmación —como usar un nombre diferente en espacios seguros— tienen un impacto enorme en el bienestar.':'',
+      hS>55?'Tu historia personal muestra señales consistentes a lo largo del tiempo. Esto sugiere que el cuestionamiento no es nuevo, aunque quizás ahora sea el momento de darle más espacio y atención.':'',
+      'Darte tiempo, buscar información de calidad y, si es posible, conectar con personas de experiencias similares puede ayudarte a clarificar lo que sientes.',
+    ].filter(Boolean)
+  };}
+  if(avg<=65){return{
+    badge:'Identidad en proceso de afirmación',bbg:'#f0f6ff',bco:'#6b9cc4',
+    title:'Tu experiencia es muy consistente con la vivencia trans y no binaria',
+    intro:'Tus respuestas muestran un patrón claro de discordancia de género que se repite a través de múltiples dimensiones de tu vida.',
+    pbg:'linear-gradient(135deg,#f0f6ff,#f4fff9)',pbd:'rgba(107,156,196,.3)',
+    boxT:'Una lectura aproximada de tu experiencia',
+    paras:[
+      'La discordancia significativa que describes entre el género asignado al nacer y cómo te percibes internamente no es una fase ni una confusión. Es una experiencia reconocida y documentada por la ciencia, la psicología y la medicina contemporánea (ICD-11 HA60, WPATH SoC 8).',
+      iS>60?'Tu identidad interna muestra una claridad notable. La sensación de "ser diferente al género asignado" que describes es coherente a través de múltiples dimensiones de tus respuestas.':'',
+      eS>60?'La brecha entre tu expresión pública y tu identidad interna parece significativa. La investigación muestra que reducir esa brecha —incluso en pasos pequeños— tiene un impacto directo y medible en el bienestar emocional y la salud mental.':'',
+      cS>60?'Tu entorno cultural presenta desafíos. Conectar con culturas y tradiciones que reconocen géneros más allá del binario occidental (muxes, hijras, two-spirit, fa\'afafine) puede ser fuente de perspectiva, pertenencia y sentido.':'',
+      'Buscar apoyo especializado puede marcar una diferencia importante en este proceso.',
+    ].filter(Boolean)
+  };}
+  return{
+    badge:'Identidad trans / género diverso claramente presente',bbg:'linear-gradient(135deg,#fef0f6,#eef4ff)',bco:'#c97fa8',
+    title:'Tu identidad de género merece reconocimiento, apoyo y celebración',
+    intro:'Tus respuestas reflejan una experiencia intensa y consistente de discordancia de género. Lo que describes es lo que muchas personas trans y de género diverso en todo el mundo reconocen como el núcleo de su vivencia.',
+    pbg:'linear-gradient(135deg,#fef2f8,#eef4ff,#f0fbf6)',pbd:'rgba(201,127,168,.35)',
+    boxT:'Una lectura aproximada de tu experiencia',
+    paras:[
+      'La discordancia de género que describes es profunda y abarca múltiples dimensiones: identidad interna, relación con el cuerpo, expresión social y trayectoria personal. Esto es coherente con lo que investigadores, psicólogos y personas trans de todo el mundo describen como una identidad trans o de género diverso.',
+      'Tu identidad es válida. No es una fase, no es confusión, no es resultado de influencia externa. La investigación científica actual —incluyendo neurociencia, psicología y antropología— confirma que la identidad de género es una experiencia interna profunda y puede diferir del sexo asignado al nacer.',
+      wS<45?'Tus respuestas sobre bienestar sugieren que esta discordancia tiene un impacto real en tu vida cotidiana. Buscar apoyo profesional especializado y comunidad trans puede ser transformador para tu calidad de vida.':'A pesar de los retos, tus respuestas también muestran fortaleza y capacidad de resiliencia. Construir red de apoyo y comunidad puede ser un ancla muy poderosa.',
+      'Hay personas que han recorrido este camino antes que tú, en todos los contextos culturales del mundo, y que han encontrado formas de vivir con autenticidad y plenitud. Tu experiencia merece ser acompañada.',
+    ]
+  };
+}
+
+function dNote(i,s){
+  const T=[
+    [[0,30,'Tu identidad interna parece estar relativamente alineada con el género asignado, o la exploración apenas comienza.'],[31,55,'Hay un cuestionamiento interno real que merece tiempo y atención genuina.'],[56,75,'Tu experiencia interna muestra discordancia notable con el género asignado, lo cual es muy común en personas trans y no binarias.'],[76,100,'Tu sentido interno de identidad difiere significativamente del género asignado. Es una experiencia auténtica y válida.']],
+    [[0,30,'La dysphoria corporal parece baja o ausente en este momento de tu exploración.'],[31,55,'Hay cierta incomodidad con el cuerpo que varía en intensidad y contexto.'],[56,75,'La dysphoria corporal es una presencia notable en tu vida. Existen opciones de afirmación que pueden aliviarla.'],[76,100,'La dysphoria corporal parece intensa y frecuente. Apoyo especializado puede marcar una gran diferencia.']],
+    [[0,30,'Tu expresión parece relativamente alineada con tu identidad en este momento.'],[31,55,'Hay una brecha entre cómo te expresas y cómo te sientes que vale la pena explorar.'],[56,75,'La distancia entre tu expresión pública y tu identidad es significativa. La afirmación social puede ser muy liberadora.'],[76,100,'La necesidad de expresarte congruentemente con tu identidad es muy fuerte e importante.']],
+    [[0,30,'Tu historia personal no muestra señales tempranas muy claras, lo cual no descarta ninguna identidad.'],[31,55,'Hay elementos en tu historia que sugieren cuestionamientos que quizás no siempre fueron nombrados.'],[56,75,'Tu trayectoria muestra señales consistentes de cuestionamiento a lo largo del tiempo.'],[76,100,'Tu historia personal refleja señales muy tempranas y persistentes de discordancia de género.']],
+    [[0,30,'Tu entorno parece relativamente abierto o neutro respecto a la diversidad de género.'],[31,55,'Hay tensiones culturales que pueden dificultar la expresión libre de tu identidad.'],[56,75,'Tu contexto presenta barreras importantes. Encontrar comunidad —incluso en línea— es clave.'],[76,100,'Tu entorno cultural es desafiante. Priorizar tu seguridad y bienestar es fundamental.']],
+    [[0,30,'Tu bienestar emocional parece relativamente estable en relación a tu identidad de género.'],[31,55,'Hay impactos en el bienestar que mejorarían con mayor autenticidad y apoyo.'],[56,75,'La discordancia de género tiene un impacto real en tu bienestar. El apoyo puede ser transformador.'],[76,100,'Tu bienestar se ve significativamente afectado. Buscar apoyo especializado puede ser un punto de inflexión.']],
+  ];
+  for(const [mn,mx,txt] of T[i]){if(s>=mn&&s<=mx)return txt;}
+  return T[i][T[i].length-1][2];
+}
+
+function getPatts(sc,avg){
+  const [iS,bS,eS,hS,cS,wS]=sc;const ps=[];
+  if(iS>60&&bS>60)ps.push({ico:'🔗',hd:'Discordancia interna y corporal alineadas',bd:'Cuando tanto la identidad interna como la relación con el cuerpo muestran alta discordancia, el patrón es muy consistente con lo que describe la literatura sobre experiencia trans (Serano, 2007; Lev, 2004).'});
+  else if(iS>60&&bS<40)ps.push({ico:'🧩',hd:'Identidad interna presente sin dysphoria corporal marcada',bd:'Es posible tener una identidad que difiere del género asignado sin experimentar dysphoria corporal intensa. Muchas personas no binarias y algunas personas trans describen exactamente este patrón.'});
+  if(eS>iS+18)ps.push({ico:'🎭',hd:'La expresión social como señal más visible',bd:'Tu expresión externa muestra mayor tensión que tu identidad interna declarada. Esto puede indicar que la presión social te lleva a suprimir más de lo que internamente reconoces (Butler, 1990).'});
+  if(hS>65)ps.push({ico:'📅',hd:'Señales tempranas y consistentes a lo largo del tiempo',bd:'Tu trayectoria muestra indicadores desde etapas tempranas de vida. La investigación documenta que muchas personas trans reportan señales desde la infancia, aunque no siempre tuvieran el lenguaje para nombrarlas (Drescher, 2014).'});
+  if(cS>65&&wS<50)ps.push({ico:'🌍',hd:'Presión cultural con impacto en el bienestar',bd:'Existe una correlación entre las dificultades en tu contexto cultural y un menor bienestar emocional. Esto coincide con el Modelo de Estrés de Minorías (Meyer, 2003): los factores externos tienen un impacto real en la salud mental.'});
+  if(wS>70)ps.push({ico:'🌱',hd:'Recursos de resiliencia sólidos',bd:'A pesar de los desafíos, tus respuestas muestran capacidad de resiliencia y búsqueda activa de apoyo. Este es un factor protector muy significativo (Singh, 2013).'});
+  if(avg>62&&wS<40)ps.push({ico:'⚠️',hd:'Alta discordancia con impacto en el bienestar',bd:'Cuando la discordancia de género es alta y el bienestar es bajo, buscar apoyo profesional especializado se vuelve especialmente importante. No es necesario atravesar esto en soledad.'});
+  if(ps.length===0)ps.push({ico:'🔍',hd:'Exploración en curso',bd:'Tus respuestas no forman un patrón unívoco, lo cual es perfectamente normal. La identidad de género es un espectro multidimensional y cada persona la vive de forma única e irrepetible.'});
+  return ps.slice(0,4);
+}
+
+function getSteps(sc,avg){
+  const [iS,bS,eS,hS,cS,wS]=sc;const st=[];
+  if(avg<32)st.push('<strong>Explorar sin presión ni destino fijo.</strong> Leer testimonios de personas trans y de género diverso puede abrir perspectivas sin obligarte a concluir nada. Libros como <em>Gender Outlaw</em> (Bornstein) son un buen punto de partida.');
+  else if(avg<55)st.push('<strong>Profundizar en recursos de calidad.</strong> <em>Whipping Girl</em> (Serano) o <em>Testo Junkie</em> (Preciado) ofrecen perspectivas que pueden resonar con tu experiencia y darte vocabulario para lo que sientes.');
+  else st.push('<strong>Considerar apoyo profesional especializado.</strong> Un/a/e profesional de salud mental con formación en diversidad de género puede acompañarte de forma no directiva y respetuosa. Busca alguien con experiencia explícita en identidad trans.');
+  if(eS>55)st.push('<strong>Pequeños experimentos de expresión en espacios seguros.</strong> Usar un nombre diferente con una persona de confianza, o explorar cambios en tu presentación privadamente, puede ayudarte a conectar visceralmente con lo que sientes.');
+  if(cS>60)st.push('<strong>Buscar comunidad.</strong> Grupos presenciales u online de personas trans y no binarias pueden ofrecer apoyo, perspectiva y modelos de vida que el entorno inmediato quizás no ofrece. No estar solo/sola/sole hace una diferencia enorme.');
+  if(bS>60)st.push('<strong>Informarte sobre opciones de afirmación de género.</strong> Desde cambios sociales (nombre, pronombres) hasta opciones médicas. La guía WPATH SoC 8 (disponible en línea) es un recurso accesible y actualizado.');
+  st.push('<strong>Darte permiso de no saber aún.</strong> La identidad de género puede explorarse sin urgencia y sin un destino predefinido. No existe una única forma correcta de ser trans, no binario/a/e, o cualquier otra cosa.');
+  return st.slice(0,4);
+}
+</script>
+</body>
+</html>
